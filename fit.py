@@ -185,9 +185,9 @@ def get_default_params(xdata, ydata, func):
     return array([base, exponent])
   else:
     # Just put some values from the x's into the params.
-    for i in xrange(21):
+    for i in range(21):
       try:
-        args = [range(i), 0]
+        args = [list(range(i)), 0]
         result = func(*args)
       except ValueError:
         pass
@@ -257,7 +257,7 @@ def fit(func, x,y, default_pars=None, data_range=None, we=None, verbose=False, i
   if verbose: fit.pprint()
 
   if fit.stopreason[0] == 'Iteration limit reached':
-    print '(WWW) poly_lsq: Iteration limit reached, result not reliable!'
+    print('(WWW) poly_lsq: Iteration limit reached, result not reliable!')
 
   # Results and errors
   coeff = fit.beta
@@ -281,7 +281,7 @@ def fit(func, x,y, default_pars=None, data_range=None, we=None, verbose=False, i
 
 def polN_dec(func):
   """ Polynomial decorator """
-  degree = int(func.func_name.replace("pol",""))
+  degree = int(func.__name__.replace("pol",""))
   def polN(*args):
     params, x = args
     if len(params) != degree+1:
